@@ -1,9 +1,9 @@
-import pytesseract
+# import pytesseract
 from PIL import Image, ImageFilter
 # from scipy.ndimage.filters import gaussian_filter
 # import numpy
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+# from selenium import webdriver
+# from selenium.webdriver.common.by import By
 import time
 
 
@@ -22,9 +22,10 @@ def main():
     threshold = threshold.filter(ImageFilter.SMOOTH_MORE)
     threshold.save("wow.png")
     time.sleep(.2)
-    print("test")
-    pytesseract.image_to_string(Image.open("wow.png"))
-
+    cropped = Image.open("wow.png")
+    w, h = cropped.size
+    wow = cropped.crop((580, 120, w, h-140))
+    wow.save("out.png")
 
 if __name__ == '__main__':
     main()
